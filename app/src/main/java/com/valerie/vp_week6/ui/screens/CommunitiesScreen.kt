@@ -41,7 +41,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.valerie.vp_week6.model.ClubFilter
 import com.valerie.vp_week6.ui.components.AppCard
 import com.valerie.vp_week6.ui.components.ClubIcon
-import com.valerie.vp_week6.ui.components.JoinedPill
+import com.valerie.vp_week6.ui.components.JoinedButton
+import androidx.compose.foundation.layout.height
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.runtime.LaunchedEffect
 import com.valerie.vp_week6.ui.components.ScreenHeader
 import com.valerie.vp_week6.ui.theme.Blue600
 import com.valerie.vp_week6.ui.theme.Slate200
@@ -55,9 +58,14 @@ fun CommunitiesScreen(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val listState = rememberLazyListState()
+    LaunchedEffect(state.filter, state.query) { listState.scrollToItem(0) }
 
     Column(Modifier.fillMaxSize()) {
-        ScreenHeader("Communities Directory", "Pilih komunitas untuk membuka Club Projects") {
+        ScreenHeader(
+            "Communities Directory",
+            "Pilih komunitas untuk membuka Club Projects",
+            subtitleFontWeight = FontWeight.Medium
+        ) {
             IconButton(onClick = viewModel::toggleSearch) {
                 Icon(Icons.Default.Search, contentDescription = "Search", tint = Navy)
             }
@@ -115,11 +123,12 @@ fun CommunitiesScreen(
                                 Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
                                     Icon(Icons.Outlined.LockOpen, null, tint = Blue600, modifier = Modifier.size(18.dp))
                                     Text(
-                                        "  Unlocked • Buka Proyek →",
+                                        "  Unlocked • Buka Proyek ",
                                         fontSize = 13.sp, fontWeight = FontWeight.Bold, color = Blue600
                                     )
+                                    Icon(Icons.AutoMirrored.Filled.ArrowForward, null, tint = Blue600, modifier = Modifier.size(16.dp))
                                 }
-                                JoinedPill(onClick = { viewModel.toggleJoin(club.id) })
+                                JoinedButton(onClick = { viewModel.toggleJoin(club.id) })
                             } else {
                                 Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
                                     Icon(Icons.Filled.Lock, null, tint = Color(0xFF94A3B8), modifier = Modifier.size(18.dp))
@@ -128,9 +137,13 @@ fun CommunitiesScreen(
                                         fontSize = 13.sp, fontWeight = FontWeight.Medium, color = Color(0xFF94A3B8)
                                     )
                                 }
-                                Button(onClick = { viewModel.toggleJoin(club.id) }) {
-                                    Icon(Icons.Default.Add, null, modifier = Modifier.size(18.dp))
-                                    Text("  Join", fontWeight = FontWeight.Bold)
+                                Button(
+                                    onClick = { viewModel.toggleJoin(club.id) },
+                                    contentPadding = PaddingValues(horizontal = 14.dp, vertical = 0.dp),
+                                    modifier = Modifier.height(36.dp)
+                                ) {
+                                    Icon(Icons.Default.Add, null, modifier = Modifier.size(16.dp))
+                                    Text("  Join", fontSize = 14.sp, fontWeight = FontWeight.Bold)
                                 }
                             }
                         }

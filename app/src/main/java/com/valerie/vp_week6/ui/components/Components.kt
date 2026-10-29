@@ -116,7 +116,7 @@ fun SectionHeader(
         )
         Text(
             title,
-            modifier = Modifier.weight(1f).padding(start = 8.dp),
+            modifier = Modifier.weight(1f).padding(start = 5.dp),
             fontSize = 16.sp,
             lineHeight = 22.sp,
             style = TextStyle(
@@ -128,7 +128,7 @@ fun SectionHeader(
             fontWeight = FontWeight.ExtraBold,
             color = Navy
         )
-        Text(trailing, fontSize = 11.sp, maxLines = 1, color = Blue600, fontWeight = FontWeight.Bold)
+        Text(trailing, fontSize = 13.sp, maxLines = 1, color = Blue600, fontWeight = FontWeight.Bold)
     }
 }
 
@@ -143,7 +143,7 @@ fun EmptyMessage(text: String, modifier: Modifier = Modifier) {
 }
 
 val BoldCheck: ImageVector = ImageVector.Builder("BoldCheck", 24.dp, 24.dp, 24f, 24f).apply {
-    path(stroke = SolidColor(Color.Black), strokeLineWidth = 3.6f, strokeLineCap = StrokeCap.Round) {
+    path(stroke = SolidColor(Color.Black), strokeLineWidth = 4.6f, strokeLineCap = StrokeCap.Round) {
         moveTo(4.5f, 12.5f); lineTo(9.5f, 17.5f); lineTo(19.5f, 6.5f)
     }
 }.build()
@@ -151,20 +151,40 @@ val BoldCheck: ImageVector = ImageVector.Builder("BoldCheck", 24.dp, 24.dp, 24f,
 val JoinedBorder = Color(0xFFEBC4C4)
 
 @Composable
-fun JoinedPill(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null) {
+fun JoinedPill(modifier: Modifier = Modifier, containerColor: Color = RedSoft, onClick: (() -> Unit)? = null) {
     Surface(
         modifier = modifier.then(if (onClick == null) Modifier else Modifier.clickable(onClick = onClick)),
-        shape = RoundedCornerShape(50),
-        color = RedSoft,
+        shape = RoundedCornerShape(8.dp),
+        color = containerColor,
         border = BorderStroke(1.dp, JoinedBorder)
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
+            horizontalArrangement = Arrangement.spacedBy(3.dp)
         ) {
-            Text("Joined", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = RedJoined)
-            Icon(BoldCheck, contentDescription = null, tint = RedJoined, modifier = Modifier.size(16.dp))
+            Text("Joined", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = RedJoined)
+            Icon(BoldCheck, contentDescription = null, tint = RedJoined, modifier = Modifier.size(12.dp))
+        }
+    }
+}
+
+@Composable
+fun JoinedButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Surface(
+        onClick = onClick,
+        modifier = modifier,
+        shape = RoundedCornerShape(50),
+        color = RedSoft,
+        border = BorderStroke(1.5.dp, RedJoined)
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 7.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Icon(BoldCheck, contentDescription = null, tint = RedJoined, modifier = Modifier.size(14.dp))
+            Text("Joined", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = RedJoined)
         }
     }
 }

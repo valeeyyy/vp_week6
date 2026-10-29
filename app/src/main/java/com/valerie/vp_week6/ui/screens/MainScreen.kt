@@ -1,7 +1,9 @@
 package com.valerie.vp_week6.ui.screens
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.vector.path
+import androidx.compose.ui.unit.dp as dpUnit
 import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.PriorityHigh
 import androidx.compose.foundation.layout.padding
@@ -43,10 +45,19 @@ import com.valerie.vp_week6.navigation.Routes
 import com.valerie.vp_week6.util.UiEvent
 import com.valerie.vp_week6.viewmodel.CampusViewModel
 
+/** Material "HomeFilled" glyph (not shipped in Compose's icon set). */
+private val HomeFilled: ImageVector = ImageVector.Builder("HomeFilled", 24.dpUnit, 24.dpUnit, 24f, 24f).apply {
+    path(fill = SolidColor(Color.Black)) {
+        moveTo(10f, 20f); verticalLineTo(14f); horizontalLineTo(14f); verticalLineTo(20f)
+        horizontalLineTo(19f); verticalLineTo(12f); horizontalLineTo(22f)
+        lineTo(12f, 3f); lineTo(2f, 12f); horizontalLineTo(5f); verticalLineTo(20f); close()
+    }
+}.build()
+
 private data class TopLevelItem(val route: String, val label: String, val icon: ImageVector)
 
 private val topLevelItems = listOf(
-    TopLevelItem(Routes.DASHBOARD, "Dashboard", Icons.Filled.Home),
+    TopLevelItem(Routes.DASHBOARD, "Dashboard", HomeFilled),
     TopLevelItem(Routes.COMMUNITIES, "Communities", Icons.Filled.People)
 )
 
@@ -79,15 +90,16 @@ fun MainScreen(viewModel: CampusViewModel = viewModel()) {
                         Modifier.padding(start = 16.dp, end = 4.dp, top = 6.dp, bottom = 6.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Box(Modifier.size(26.dp).background(Color(0xFFF5A623), CircleShape), contentAlignment = Alignment.Center) {
-                            Icon(Icons.Default.PriorityHigh, null, tint = Color.White, modifier = Modifier.size(16.dp))
+                        Box(Modifier.size(28.dp).background(Color(0xFFF5A623), CircleShape), contentAlignment = Alignment.Center) {
+                            Text("!", color = Color(0xFF1B2433), fontSize = 17.sp, lineHeight = 17.sp, fontWeight = FontWeight.ExtraBold)
                         }
                         Text(
                             data.visuals.message,
                             modifier = Modifier.weight(1f).padding(horizontal = 12.dp),
                             color = Color.White,
-                            fontSize = 14.sp,
-                            lineHeight = 18.sp
+                            fontSize = 13.sp,
+                            lineHeight = 17.sp,
+                            softWrap = true
                         )
                         TextButton(onClick = { data.dismiss() }) {
                             Text("OK", color = Color(0xFF8AB4FF), fontWeight = FontWeight.Bold)

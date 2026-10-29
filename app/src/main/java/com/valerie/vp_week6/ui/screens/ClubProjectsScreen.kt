@@ -2,6 +2,7 @@ package com.valerie.vp_week6.ui.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +24,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.outlined.Layers
+import androidx.compose.material.icons.filled.FilterNone
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.ui.unit.sp
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -98,6 +106,8 @@ fun ClubProjectsScreen(
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 onClick = viewModel::openDialog,
+                modifier = Modifier.shadow(14.dp, RoundedCornerShape(16.dp), ambientColor = Color(0xFFB8BEC8), spotColor = Color(0xFFB8BEC8)),
+                elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
                 containerColor = Color(0xFFDCE6FF),
                 contentColor = Blue900,
                 icon = { Icon(Icons.Default.Add, contentDescription = null) },
@@ -119,20 +129,21 @@ fun ClubProjectsScreen(
                     Row(
                         Modifier.fillMaxWidth()
                             .background(Brush.horizontalGradient(listOf(Color(0xFFE6EEFF), Color(0xFFD6E3FF))), RoundedCornerShape(20.dp))
+                            .border(1.dp, Color(0xFFA9C0F5), RoundedCornerShape(20.dp))
                             .padding(16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column(Modifier.weight(1f)) {
                             Text(club.fullName, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.ExtraBold, color = Blue900)
-                            Text("${club.members} Anggota • ${projects.size} Proyek Aktif", style = MaterialTheme.typography.bodySmall, color = Blue600)
+                            Text("${club.members} Anggota • ${projects.size} Proyek Aktif", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = Blue600)
                         }
-                        JoinedPill()
+                        JoinedPill(containerColor = Color.White)
                     }
                 }
             }
             item {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Outlined.Layers, contentDescription = null, tint = Color(0xFF2F55D4), modifier = Modifier.size(22.dp))
+                    Icon(Icons.Filled.FilterNone, contentDescription = null, tint = Color(0xFF2F55D4), modifier = Modifier.size(22.dp))
                     Text("Daftar Proyek Mahasiswa (${projects.size})", Modifier.padding(start = 8.dp), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.ExtraBold)
                 }
             }
@@ -143,8 +154,8 @@ fun ClubProjectsScreen(
                         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                             ProjectIcon(project, size = 46.dp)
                             Column(Modifier.weight(1f)) {
-                                Text(project.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.ExtraBold)
-                                Text(project.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text(project.title, fontSize = 16.sp, lineHeight = 20.sp, fontWeight = FontWeight.ExtraBold)
+                                Text(project.description, fontSize = 12.sp, lineHeight = 17.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 2.dp))
                             }
                             Box(
                                 Modifier.size(40.dp).background(RedSoft, CircleShape).clickableNoRipple { viewModel.deleteProject(project.id) },
@@ -179,34 +190,39 @@ private fun AddProjectDialog(viewModel: CampusViewModel, techOptions: List<Strin
 
     AlertDialog(
         onDismissRequest = {}, // only closable through "Cancel"
-        properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false),
+        modifier = Modifier.padding(horizontal = 20.dp).fillMaxWidth(),
+        properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false, usePlatformDefaultWidth = false),
         shape = RoundedCornerShape(28.dp),
         containerColor = Color.White,
         title = {
             Column {
-                Text("Add Project", fontWeight = FontWeight.ExtraBold)
+                Text("Add Project", fontSize = 22.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF0B0F1A))
                 Text(
                     "Komunitas: ${club.name} (${club.fullName})",
-                    style = MaterialTheme.typography.bodySmall,
+                    fontSize = 13.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         },
         text = {
             Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Text("Judul Proyek *", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
+                Text("Judul Proyek *", fontSize = 15.sp, fontWeight = FontWeight.Bold, color = Color(0xFF0B0F1A))
                 OutlinedTextField(
                     value = form.title,
                     onValueChange = viewModel::onTitleChange,
                     singleLine = true,
+                    textStyle = TextStyle(fontSize = 15.sp),
+                    colors = fieldColors(),
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 )
-                Text("Deskripsi Proyek (Minimal 3 Baris) *", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
+                Text("Deskripsi Proyek (Minimal 3 Baris) *", fontSize = 15.sp, fontWeight = FontWeight.Bold, color = Color(0xFF0B0F1A))
                 OutlinedTextField(
                     value = form.description,
                     onValueChange = viewModel::onDescriptionChange,
                     minLines = 3,
+                    textStyle = TextStyle(fontSize = 15.sp),
+                    colors = fieldColors(),
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -214,7 +230,8 @@ private fun AddProjectDialog(viewModel: CampusViewModel, techOptions: List<Strin
                     Text(
                         "Tech Stack (Pilihan Multi-Selection) *",
                         modifier = Modifier.weight(1f),
-                        style = MaterialTheme.typography.labelLarge,
+                        fontSize = 15.sp,
+                        color = Color(0xFF0B0F1A),
                         fontWeight = FontWeight.Bold
                     )
                     Text("${form.techStack.size} Dipilih", style = MaterialTheme.typography.labelMedium, color = Blue600, fontWeight = FontWeight.Bold)
@@ -228,9 +245,17 @@ private fun AddProjectDialog(viewModel: CampusViewModel, techOptions: List<Strin
                             label = { Text(tech, fontWeight = FontWeight.Medium) },
                             leadingIcon = {
                                 if (selected) Icon(Icons.Default.Check, contentDescription = null, Modifier.size(16.dp))
-                                else Text("+")
+                                else Text("+", color = Color(0xFF475569))
                             },
                             shape = RoundedCornerShape(10.dp),
+                            colors = FilterChipDefaults.filterChipColors(
+                                containerColor = Color(0xFFF1F5F9),
+                                labelColor = Color(0xFF475569),
+                                iconColor = Color(0xFF475569),
+                                selectedContainerColor = Color(0xFFDCE6FF),
+                                selectedLabelColor = Blue900,
+                                selectedLeadingIconColor = Blue900
+                            ),
                             border = FilterChipBorder(selected)
                         )
                     }
@@ -247,11 +272,21 @@ private fun AddProjectDialog(viewModel: CampusViewModel, techOptions: List<Strin
 }
 
 @Composable
+private fun fieldColors() = OutlinedTextFieldDefaults.colors(
+    focusedContainerColor = Color(0xFFF1F5F9),
+    unfocusedContainerColor = Color(0xFFF1F5F9),
+    unfocusedBorderColor = Color(0xFF94A3B8),
+    focusedBorderColor = Blue600,
+    focusedTextColor = Color(0xFF0B0F1A),
+    unfocusedTextColor = Color(0xFF0B0F1A)
+)
+
+@Composable
 private fun FilterChipBorder(selected: Boolean) =
     androidx.compose.material3.FilterChipDefaults.filterChipBorder(
         enabled = true,
         selected = selected,
-        borderColor = Slate200,
+        borderColor = Color(0xFFCBD5E1),
         selectedBorderColor = Blue600
     )
 

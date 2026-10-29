@@ -95,7 +95,7 @@ fun DashboardScreen(
                                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 3.dp),
                                     style = MaterialTheme.typography.labelSmall,
                                     fontWeight = FontWeight.Bold,
-                                    color = Color(0xFFD1D5DB)
+                                    color = Color(0xFFF1F5F9)
                                 )
                             }
                             Text(profile.name, fontSize = 20.sp, lineHeight = 26.sp, fontWeight = FontWeight.ExtraBold, color = Color.White)
@@ -126,27 +126,27 @@ fun DashboardScreen(
                 items(state.joinedClubs, key = { "club_${it.id}" }) { club ->
                     AppCard(Modifier.fillMaxWidth()) {
                         Row(
-                            Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+                            Modifier.padding(horizontal = 12.dp, vertical = 14.dp),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(14.dp)
+                            horizontalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
-                            ClubIcon(club, size = 56.dp)
+                            ClubIcon(club, size = 52.dp)
                             Column(Modifier.weight(1f)) {
                                 Text(club.name, fontSize = 18.sp, lineHeight = 22.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Text(
                                         club.tagline,
                                         modifier = Modifier.weight(1f),
-                                        fontSize = 14.sp,
-                                        lineHeight = 18.sp,
+                                        fontSize = 12.sp,
+                                        lineHeight = 16.sp,
                                         maxLines = 1,
                                         overflow = TextOverflow.Ellipsis,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                     Text(
                                         " • ${state.projectsOf(club.id).size} Proyek",
-                                        fontSize = 14.sp,
-                                        lineHeight = 18.sp,
+                                        fontSize = 12.sp,
+                                        lineHeight = 16.sp,
                                         maxLines = 1,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )

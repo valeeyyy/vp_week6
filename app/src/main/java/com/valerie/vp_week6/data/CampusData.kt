@@ -55,7 +55,7 @@ object CampusData {
         Project(
             "proj-gdsc-02", "gdsc", "Student Attendance QR Scanner",
             "Pemindai barcode & QR presensi kehadiran workshop berbasis CameraX & Firebase.",
-            listOf("Jetpack Compose", "Firebase", "CameraX"), ProjectStatus.COMPLETED, "qr"
+            listOf("Jetpack Compose", "Firebase", "CameraX"), ProjectStatus.COMPLETED, "codegreen"
         ),
         Project(
             "proj-gdsc-03", "gdsc", "Developer RSVP Portal",

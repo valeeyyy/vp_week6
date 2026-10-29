@@ -37,6 +37,7 @@ fun iconStyle(key: String): IconStyle = when (key) {
     "web" -> IconStyle(Icons.Default.Language, Color(0xFF0F9D8A), Color(0xFFE0F7F4))
     "data" -> IconStyle(Icons.Default.BarChart, Color(0xFFE08A00), Color(0xFFFFF1DD))
     "android" -> IconStyle(Icons.Default.Android, Color(0xFF0D52CE), Color(0xFFEEF3FF))
+    "codegreen" -> IconStyle(Icons.Default.Code, Color(0xFF2E9E4F), Color(0xFFE3F7E8))
     "qr" -> IconStyle(Icons.Default.QrCodeScanner, Color(0xFF2E9E4F), Color(0xFFE3F7E8))
     "cloud" -> IconStyle(Icons.Default.Cloud, Color(0xFF6D3FE0), Color(0xFFEDE9FE))
     "groups" -> IconStyle(Icons.Default.People, Color(0xFF1A3AA8), Color(0xFFE0E9FF))
@@ -51,7 +52,7 @@ fun IconTile(key: String, modifier: Modifier = Modifier, size: Dp = 52.dp) {
         modifier = modifier.size(size).background(style.tile, RoundedCornerShape(size * 0.28f)),
         contentAlignment = Alignment.Center
     ) {
-        Icon(style.vector, contentDescription = null, tint = style.tint, modifier = Modifier.size(size * 0.5f))
+        Icon(style.vector, contentDescription = null, tint = style.tint, modifier = Modifier.size(size * when (key) { "layers" -> 0.42f; "android" -> 0.6f; else -> 0.5f }))
     }
 }
 
