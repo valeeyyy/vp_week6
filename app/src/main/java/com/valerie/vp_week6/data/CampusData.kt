@@ -66,6 +66,11 @@ object CampusData {
             "proj-cyber-01", "cyber", "Campus Wi-Fi Security Audit",
             "Audit keamanan jaringan Wi-Fi kampus dan laporan celah kerentanan.",
             listOf("Python", "Kotlin"), icon = "shield"
+        ),
+        Project(
+            "proj-mobile-01", "mobile", "Campus Events App",
+            "Aplikasi agenda dan pendaftaran kegiatan kampus berbasis Jetpack Compose.",
+            listOf("Kotlin", "Jetpack Compose"), icon = "phone"
         )
     )
 

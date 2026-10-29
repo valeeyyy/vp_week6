@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-/** In-memory single source of truth for clubs and projects. */
 class CampusRepository {
     val profile: StudentProfile = CampusData.profile
     val techStackOptions: List<String> = CampusData.techStackOptions
@@ -22,7 +21,6 @@ class CampusRepository {
     fun toggleJoin(clubId: String) {
         val club = _clubs.value.firstOrNull { it.id == clubId } ?: return
         _clubs.update { list -> list.map { if (it.id == clubId) it.copy(isJoined = !it.isJoined) else it } }
-        // Leaving a club removes the projects recorded in it.
         if (club.isJoined) _projects.update { list -> list.filterNot { it.clubId == clubId } }
     }
 

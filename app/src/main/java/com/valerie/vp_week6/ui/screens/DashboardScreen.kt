@@ -117,6 +117,7 @@ fun DashboardScreen(
                     Blue600,
                     "Semua Komunitas yang Diikuti (${state.joinedClubs.size})",
                     "Status: Joined",
+                    modifier = Modifier.padding(top = 8.dp),
                     iconVerticalOffset = (-2).dp
                 )
             }
@@ -132,32 +133,20 @@ fun DashboardScreen(
                         ) {
                             ClubIcon(club, size = 52.dp)
                             Column(Modifier.weight(1f)) {
-                                Text(club.name, fontSize = 18.sp, lineHeight = 22.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Text(
-                                        club.tagline,
-                                        modifier = Modifier.weight(1f),
-                                        fontSize = 12.sp,
-                                        lineHeight = 16.sp,
-                                        maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                    Text(
-                                        " • ${state.projectsOf(club.id).size} Proyek",
-                                        fontSize = 12.sp,
-                                        lineHeight = 16.sp,
-                                        maxLines = 1,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                }
+                                Text(club.name, fontSize = 16.sp, lineHeight = 20.sp, fontWeight = FontWeight.ExtraBold, color = Navy)
+                                Text(
+                                    "${club.tagline} • ${state.projectsOf(club.id).size} Proyek",
+                                    fontSize = 12.sp,
+                                    lineHeight = 16.sp,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
                             }
                             JoinedPill()
                         }
                     }
                 }
             }
-            item { SectionHeader(Icons.Filled.CropSquare, Color(0xFF6D3FE0), "Semua Proyek Mahasiswa (${state.totalProjects})", "Total: ${state.totalProjects} Proyek") }
+            item { SectionHeader(Icons.Filled.CropSquare, Color(0xFF6D3FE0), "Semua Proyek Mahasiswa (${state.totalProjects})", "Total: ${state.totalProjects} Proyek", modifier = Modifier.padding(top = 8.dp)) }
             if (state.projects.isEmpty()) {
                 item { EmptyMessage(Messages.NO_PROJECTS) }
             } else {

@@ -21,6 +21,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Code
+import androidx.compose.material.icons.filled.Dns
+import androidx.compose.material.icons.filled.LocalFireDepartment
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Storage
+import androidx.compose.material.icons.filled.Terminal
+import androidx.compose.material.icons.filled.Widgets
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.sp
+import com.valerie.vp_week6.ui.theme.Blue600
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -38,6 +51,18 @@ import com.valerie.vp_week6.ui.components.AppCard
 import com.valerie.vp_week6.ui.components.StatusBadge
 import com.valerie.vp_week6.ui.components.TechTag
 import com.valerie.vp_week6.viewmodel.CampusViewModel
+
+private fun techIcon(name: String): ImageVector = when (name) {
+    "Kotlin" -> Icons.Default.Code
+    "Jetpack Compose" -> Icons.Default.Widgets
+    "Room" -> Icons.Default.Storage
+    "Firebase" -> Icons.Default.LocalFireDepartment
+    "Ktor" -> Icons.Default.Dns
+    "Python" -> Icons.Default.Terminal
+    "Google Maps SDK" -> Icons.Default.LocationOn
+    "CameraX" -> Icons.Default.CameraAlt
+    else -> Icons.Default.Code
+}
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
@@ -76,7 +101,7 @@ fun ProjectDetailScreen(
                     .padding(20.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
-                Surface(shape = RoundedCornerShape(50), color = Color(0xFF2B4A9E)) {
+                Surface(shape = RoundedCornerShape(50), color = Color(0xFF243B7A), border = BorderStroke(1.dp, Color(0xFF3B5BB5))) {
                     Text(
                         clubName,
                         modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
@@ -85,7 +110,7 @@ fun ProjectDetailScreen(
                         color = Color(0xFFBFD0FF)
                     )
                 }
-                Text(project.title, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold, color = Color.White)
+                Text(project.title, fontSize = 22.sp, lineHeight = 28.sp, fontWeight = FontWeight.ExtraBold, color = Color.White)
             }
             AppCard(Modifier.fillMaxWidth()) {
                 Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -100,21 +125,30 @@ fun ProjectDetailScreen(
                         checked = project.status == ProjectStatus.COMPLETED,
                         onCheckedChange = {
                             viewModel.setProjectStatus(project.id, if (it) ProjectStatus.COMPLETED else ProjectStatus.IN_PROGRESS)
-                        }
+                        },
+                        thumbContent = {},
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = Color.White,
+                            checkedTrackColor = Blue600,
+                            checkedBorderColor = Color.Transparent,
+                            uncheckedThumbColor = Color.White,
+                            uncheckedTrackColor = Color(0xFFCBD5E1),
+                            uncheckedBorderColor = Color.Transparent
+                        )
                     )
                 }
             }
             AppCard(Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text("Deskripsi Lengkap Proyek", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.ExtraBold)
-                    Text(project.description, style = MaterialTheme.typography.bodyMedium, color = Color(0xFF475569))
+                    Text(project.description, fontSize = 15.sp, lineHeight = 26.sp, color = Color(0xFF475569))
                 }
             }
             AppCard(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Text("Tech Stack Terpilih", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.ExtraBold)
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        project.techStack.forEach { TechTag(it) }
+                        project.techStack.forEach { TechTag(it, icon = techIcon(it)) }
                     }
                 }
             }

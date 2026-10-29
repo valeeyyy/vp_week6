@@ -128,7 +128,7 @@ fun SectionHeader(
             fontWeight = FontWeight.ExtraBold,
             color = Navy
         )
-        Text(trailing, fontSize = 13.sp, maxLines = 1, color = Blue600, fontWeight = FontWeight.Bold)
+        Text(trailing, fontSize = 12.sp, maxLines = 1, color = Blue600, fontWeight = FontWeight.Bold)
     }
 }
 
@@ -179,25 +179,37 @@ fun JoinedButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
         border = BorderStroke(1.5.dp, RedJoined)
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 7.dp),
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            Icon(BoldCheck, contentDescription = null, tint = RedJoined, modifier = Modifier.size(14.dp))
-            Text("Joined", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = RedJoined)
+            Icon(BoldCheck, contentDescription = null, tint = RedJoined, modifier = Modifier.size(12.dp))
+            Text("Joined", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = RedJoined)
         }
     }
 }
 
 @Composable
-fun TechTag(text: String, modifier: Modifier = Modifier) {
-    Surface(modifier = modifier, shape = RoundedCornerShape(8.dp), color = Slate100) {
-        Text(
-            text,
-            modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
-            style = MaterialTheme.typography.labelMedium,
-            fontWeight = FontWeight.Medium
-        )
+fun TechTag(text: String, modifier: Modifier = Modifier, icon: ImageVector? = null) {
+    Surface(
+        modifier = modifier,
+        shape = RoundedCornerShape(if (icon != null) 10.dp else 8.dp),
+        color = Slate100,
+        border = if (icon != null) BorderStroke(1.dp, Slate200) else null
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = if (icon != null) 6.dp else 5.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            if (icon != null) Icon(icon, contentDescription = null, tint = Blue600, modifier = Modifier.size(14.dp))
+            Text(
+                text,
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = if (icon != null) FontWeight.SemiBold else FontWeight.Medium,
+                color = if (icon != null) Color(0xFF334155) else Color.Unspecified
+            )
+        }
     }
 }
 

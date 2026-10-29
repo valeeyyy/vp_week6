@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -94,7 +95,7 @@ fun ClubProjectsScreen(
                 title = {
                     Column {
                         Text("${club?.name.orEmpty()} Projects", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold)
-                        Text(club?.fullName.orEmpty(), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(club?.fullName.orEmpty(), style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 },
                 navigationIcon = {
@@ -106,7 +107,7 @@ fun ClubProjectsScreen(
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 onClick = viewModel::openDialog,
-                modifier = Modifier.shadow(14.dp, RoundedCornerShape(16.dp), ambientColor = Color(0xFFB8BEC8), spotColor = Color(0xFFB8BEC8)),
+                modifier = Modifier.shadow(20.dp, RoundedCornerShape(16.dp), ambientColor = Color(0xFF8E98AA), spotColor = Color(0xFF8E98AA)),
                 elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
                 containerColor = Color(0xFFDCE6FF),
                 contentColor = Blue900,
@@ -130,7 +131,7 @@ fun ClubProjectsScreen(
                         Modifier.fillMaxWidth()
                             .background(Brush.horizontalGradient(listOf(Color(0xFFE6EEFF), Color(0xFFD6E3FF))), RoundedCornerShape(20.dp))
                             .border(1.dp, Color(0xFFA9C0F5), RoundedCornerShape(20.dp))
-                            .padding(16.dp),
+                            .padding(horizontal = 16.dp, vertical = 10.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column(Modifier.weight(1f)) {
@@ -143,7 +144,7 @@ fun ClubProjectsScreen(
             }
             item {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Filled.FilterNone, contentDescription = null, tint = Color(0xFF2F55D4), modifier = Modifier.size(22.dp))
+                    Icon(Icons.Filled.FilterNone, contentDescription = null, tint = Color(0xFF2F55D4), modifier = Modifier.size(18.dp))
                     Text("Daftar Proyek Mahasiswa (${projects.size})", Modifier.padding(start = 8.dp), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.ExtraBold)
                 }
             }
@@ -189,7 +190,7 @@ private fun AddProjectDialog(viewModel: CampusViewModel, techOptions: List<Strin
     val form by viewModel.form.collectAsStateWithLifecycle()
 
     AlertDialog(
-        onDismissRequest = {}, // only closable through "Cancel"
+        onDismissRequest = {},
         modifier = Modifier.padding(horizontal = 20.dp).fillMaxWidth(),
         properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false, usePlatformDefaultWidth = false),
         shape = RoundedCornerShape(28.dp),
@@ -221,6 +222,7 @@ private fun AddProjectDialog(viewModel: CampusViewModel, techOptions: List<Strin
                     value = form.description,
                     onValueChange = viewModel::onDescriptionChange,
                     minLines = 3,
+                    maxLines = 3,
                     textStyle = TextStyle(fontSize = 15.sp),
                     colors = fieldColors(),
                     shape = RoundedCornerShape(12.dp),
@@ -242,7 +244,7 @@ private fun AddProjectDialog(viewModel: CampusViewModel, techOptions: List<Strin
                         FilterChip(
                             selected = selected,
                             onClick = { viewModel.onTechToggle(tech) },
-                            label = { Text(tech, fontWeight = FontWeight.Medium) },
+                            label = { Text(tech, fontWeight = FontWeight.Medium, modifier = if (selected) Modifier else Modifier.offset(x = (-4).dp)) },
                             leadingIcon = {
                                 if (selected) Icon(Icons.Default.Check, contentDescription = null, Modifier.size(16.dp))
                                 else Text("+", color = Color(0xFF475569))
@@ -273,9 +275,9 @@ private fun AddProjectDialog(viewModel: CampusViewModel, techOptions: List<Strin
 
 @Composable
 private fun fieldColors() = OutlinedTextFieldDefaults.colors(
-    focusedContainerColor = Color(0xFFF1F5F9),
-    unfocusedContainerColor = Color(0xFFF1F5F9),
-    unfocusedBorderColor = Color(0xFF94A3B8),
+    focusedContainerColor = Color(0xFFF8FAFC),
+    unfocusedContainerColor = Color(0xFFF8FAFC),
+    unfocusedBorderColor = Color(0xFFD5DCE6),
     focusedBorderColor = Blue600,
     focusedTextColor = Color(0xFF0B0F1A),
     unfocusedTextColor = Color(0xFF0B0F1A)
@@ -287,7 +289,8 @@ private fun FilterChipBorder(selected: Boolean) =
         enabled = true,
         selected = selected,
         borderColor = Color(0xFFCBD5E1),
-        selectedBorderColor = Blue600
+        selectedBorderColor = Blue900,
+        selectedBorderWidth = 1.5.dp
     )
 
 private fun Modifier.clickableNoRipple(onClick: () -> Unit): Modifier =

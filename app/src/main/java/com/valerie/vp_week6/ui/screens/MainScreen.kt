@@ -2,6 +2,7 @@ package com.valerie.vp_week6.ui.screens
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp as dpUnit
 import androidx.compose.material.icons.filled.People
@@ -45,12 +46,16 @@ import com.valerie.vp_week6.navigation.Routes
 import com.valerie.vp_week6.util.UiEvent
 import com.valerie.vp_week6.viewmodel.CampusViewModel
 
-/** Material "HomeFilled" glyph (not shipped in Compose's icon set). */
 private val HomeFilled: ImageVector = ImageVector.Builder("HomeFilled", 24.dpUnit, 24.dpUnit, 24f, 24f).apply {
-    path(fill = SolidColor(Color.Black)) {
-        moveTo(10f, 20f); verticalLineTo(14f); horizontalLineTo(14f); verticalLineTo(20f)
-        horizontalLineTo(19f); verticalLineTo(12f); horizontalLineTo(22f)
-        lineTo(12f, 3f); lineTo(2f, 12f); horizontalLineTo(5f); verticalLineTo(20f); close()
+    path(
+        fill = SolidColor(Color.Black),
+        stroke = SolidColor(Color.Black),
+        strokeLineWidth = 1.8f,
+        strokeLineJoin = StrokeJoin.Round
+    ) {
+        moveTo(12f, 3.8f); lineTo(19.8f, 10.4f); verticalLineTo(19.2f)
+        horizontalLineTo(14.6f); verticalLineTo(14.6f); horizontalLineTo(9.4f); verticalLineTo(19.2f)
+        horizontalLineTo(4.2f); verticalLineTo(10.4f); close()
     }
 }.build()
 
@@ -109,7 +114,6 @@ fun MainScreen(viewModel: CampusViewModel = viewModel()) {
             }
         },
         bottomBar = {
-            // Bottom bar is only visible on top-level destinations.
             if (currentRoute in Routes.topLevel) {
                 NavigationBar(containerColor = Color.White) {
                     topLevelItems.forEach { item ->

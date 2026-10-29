@@ -21,11 +21,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathFillType
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.valerie.vp_week6.model.Club
 import com.valerie.vp_week6.model.Project
+
+val AndroidBot: ImageVector = ImageVector.Builder("AndroidBot", 24.dp, 24.dp, 24f, 24f).apply {
+    path(stroke = SolidColor(Color.Black), strokeLineWidth = 1.2f, strokeLineCap = StrokeCap.Round) {
+        moveTo(8.9f, 4.4f); lineTo(7.6f, 2.4f)
+        moveTo(15.1f, 4.4f); lineTo(16.4f, 2.4f)
+    }
+    path(fill = SolidColor(Color.Black), pathFillType = PathFillType.EvenOdd) {
+        moveTo(6.6f, 10f); arcTo(5.4f, 5.4f, 0f, false, true, 17.4f, 10f); close()
+        moveTo(8.8f, 7.6f); arcToRelative(0.7f, 0.7f, 0f, true, true, 1.4f, 0f); arcToRelative(0.7f, 0.7f, 0f, true, true, -1.4f, 0f); close()
+        moveTo(13.8f, 7.6f); arcToRelative(0.7f, 0.7f, 0f, true, true, 1.4f, 0f); arcToRelative(0.7f, 0.7f, 0f, true, true, -1.4f, 0f); close()
+    }
+    path(fill = SolidColor(Color.Black)) {
+        moveTo(6.6f, 9.5f); horizontalLineTo(20.2f); verticalLineTo(15.6f)
+        arcTo(1.2f, 1.2f, 0f, false, true, 19f, 16.8f); horizontalLineTo(17.4f); verticalLineTo(17.6f)
+        horizontalLineTo(6.6f); close()
+        moveTo(3.2f, 12f); arcTo(1.1f, 1.1f, 0f, false, true, 5.4f, 12f); verticalLineTo(16.2f)
+        arcTo(1.1f, 1.1f, 0f, false, true, 3.2f, 16.2f); close()
+        moveTo(8.4f, 17f); horizontalLineTo(10.6f); verticalLineTo(20.4f)
+        arcTo(1.1f, 1.1f, 0f, false, true, 8.4f, 20.4f); close()
+        moveTo(13.4f, 17f); horizontalLineTo(15.6f); verticalLineTo(20.4f)
+        arcTo(1.1f, 1.1f, 0f, false, true, 13.4f, 20.4f); close()
+    }
+}.build()
 
 data class IconStyle(val vector: ImageVector, val tint: Color, val tile: Color)
 
@@ -36,7 +63,7 @@ fun iconStyle(key: String): IconStyle = when (key) {
     "phone" -> IconStyle(Icons.Default.Smartphone, Color(0xFF1E73BE), Color(0xFFE3F0FF))
     "web" -> IconStyle(Icons.Default.Language, Color(0xFF0F9D8A), Color(0xFFE0F7F4))
     "data" -> IconStyle(Icons.Default.BarChart, Color(0xFFE08A00), Color(0xFFFFF1DD))
-    "android" -> IconStyle(Icons.Default.Android, Color(0xFF0D52CE), Color(0xFFEEF3FF))
+    "android" -> IconStyle(AndroidBot, Color(0xFF0D52CE), Color(0xFFEEF3FF))
     "codegreen" -> IconStyle(Icons.Default.Code, Color(0xFF2E9E4F), Color(0xFFE3F7E8))
     "qr" -> IconStyle(Icons.Default.QrCodeScanner, Color(0xFF2E9E4F), Color(0xFFE3F7E8))
     "cloud" -> IconStyle(Icons.Default.Cloud, Color(0xFF6D3FE0), Color(0xFFEDE9FE))

@@ -50,7 +50,6 @@ data class CampusUiState(
     val totalProjects: Int get() = projects.size
 }
 
-/** Single ViewModel shared by every destination. */
 class CampusViewModel(
     private val repository: CampusRepository = CampusRepository()
 ) : ViewModel() {
@@ -92,8 +91,7 @@ class CampusViewModel(
 
     fun toggleJoin(clubId: String) = repository.toggleJoin(clubId)
 
-    /** @return true if navigation into the club is allowed. */
-    fun canOpenClub(clubId: String): Boolean {
+        fun canOpenClub(clubId: String): Boolean {
         val joined = uiState.value.clubs.firstOrNull { it.id == clubId }?.isJoined == true
         if (!joined) _events.tryEmit(UiEvent.ShowMessage(Messages.JOIN_FIRST))
         return joined
