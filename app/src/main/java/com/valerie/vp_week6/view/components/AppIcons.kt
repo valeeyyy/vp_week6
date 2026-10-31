@@ -1,4 +1,4 @@
-package com.valerie.vp_week6.ui.components
+package com.valerie.vp_week6.view.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

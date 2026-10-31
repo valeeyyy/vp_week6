@@ -1,4 +1,4 @@
-package com.valerie.vp_week6.ui.screens
+package com.valerie.vp_week6.view.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -59,14 +59,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.valerie.vp_week6.model.Club
-import com.valerie.vp_week6.ui.components.AppCard
-import com.valerie.vp_week6.ui.components.ClubIcon
-import com.valerie.vp_week6.ui.components.EmptyMessage
-import com.valerie.vp_week6.ui.components.JoinedPill
-import com.valerie.vp_week6.ui.components.ProjectIcon
-import com.valerie.vp_week6.ui.components.StatusBadge
-import com.valerie.vp_week6.ui.components.TechTag
-import com.valerie.vp_week6.ui.components.androidxClickable
+import com.valerie.vp_week6.view.components.AppCard
+import com.valerie.vp_week6.view.components.ClubIcon
+import com.valerie.vp_week6.view.components.EmptyMessage
+import com.valerie.vp_week6.view.components.JoinedPill
+import com.valerie.vp_week6.view.components.ProjectIcon
+import com.valerie.vp_week6.view.components.StatusBadge
+import com.valerie.vp_week6.view.components.TechTag
+import com.valerie.vp_week6.view.components.androidxClickable
 import com.valerie.vp_week6.ui.theme.Blue600
 import com.valerie.vp_week6.ui.theme.Blue900
 import com.valerie.vp_week6.ui.theme.RedJoined
@@ -107,7 +107,7 @@ fun ClubProjectsScreen(
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 onClick = viewModel::openDialog,
-                modifier = Modifier.shadow(20.dp, RoundedCornerShape(16.dp), ambientColor = Color(0xFF8E98AA), spotColor = Color(0xFF8E98AA)),
+                modifier = Modifier.shadow(20.dp, RoundedCornerShape(16.dp), ambientColor = Color(0xFF4B5567), spotColor = Color(0xFF4B5567)),
                 elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
                 containerColor = Color(0xFFDCE6FF),
                 contentColor = Blue900,

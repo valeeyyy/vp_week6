@@ -1,4 +1,4 @@
-package com.valerie.vp_week6.ui.screens
+package com.valerie.vp_week6.view.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -39,13 +39,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.valerie.vp_week6.model.ClubFilter
-import com.valerie.vp_week6.ui.components.AppCard
-import com.valerie.vp_week6.ui.components.ClubIcon
-import com.valerie.vp_week6.ui.components.JoinedButton
+import com.valerie.vp_week6.view.components.AppCard
+import com.valerie.vp_week6.view.components.ClubIcon
+import com.valerie.vp_week6.view.components.JoinedButton
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.runtime.LaunchedEffect
-import com.valerie.vp_week6.ui.components.ScreenHeader
+import com.valerie.vp_week6.view.components.ScreenHeader
 import com.valerie.vp_week6.ui.theme.Blue600
 import com.valerie.vp_week6.ui.theme.Slate200
 import com.valerie.vp_week6.viewmodel.CampusViewModel

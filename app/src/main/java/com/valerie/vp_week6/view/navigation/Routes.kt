@@ -1,4 +1,4 @@
-package com.valerie.vp_week6.navigation
+package com.valerie.vp_week6.view.navigation
 
 object Routes {
     const val ARG_CLUB_ID = "clubId"

@@ -1,4 +1,4 @@
-package com.valerie.vp_week6.navigation
+package com.valerie.vp_week6.view.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
@@ -8,10 +8,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.valerie.vp_week6.ui.screens.ClubProjectsScreen
-import com.valerie.vp_week6.ui.screens.CommunitiesScreen
-import com.valerie.vp_week6.ui.screens.DashboardScreen
-import com.valerie.vp_week6.ui.screens.ProjectDetailScreen
+import com.valerie.vp_week6.view.screens.ClubProjectsScreen
+import com.valerie.vp_week6.view.screens.CommunitiesScreen
+import com.valerie.vp_week6.view.screens.DashboardScreen
+import com.valerie.vp_week6.view.screens.ProjectDetailScreen
 import com.valerie.vp_week6.viewmodel.CampusViewModel
 
 @Composable

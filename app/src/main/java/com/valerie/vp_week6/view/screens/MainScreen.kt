@@ -1,4 +1,4 @@
-package com.valerie.vp_week6.ui.screens
+package com.valerie.vp_week6.view.screens
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.ui.graphics.SolidColor
@@ -41,8 +41,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.valerie.vp_week6.navigation.AppNavGraph
-import com.valerie.vp_week6.navigation.Routes
+import com.valerie.vp_week6.view.navigation.AppNavGraph
+import com.valerie.vp_week6.view.navigation.Routes
 import com.valerie.vp_week6.util.UiEvent
 import com.valerie.vp_week6.viewmodel.CampusViewModel
 

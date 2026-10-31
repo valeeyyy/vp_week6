@@ -1,4 +1,4 @@
-package com.valerie.vp_week6.ui.screens
+package com.valerie.vp_week6.view.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -47,9 +47,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.valerie.vp_week6.model.ProjectStatus
-import com.valerie.vp_week6.ui.components.AppCard
-import com.valerie.vp_week6.ui.components.StatusBadge
-import com.valerie.vp_week6.ui.components.TechTag
+import com.valerie.vp_week6.view.components.AppCard
+import com.valerie.vp_week6.view.components.StatusBadge
+import com.valerie.vp_week6.view.components.TechTag
 import com.valerie.vp_week6.viewmodel.CampusViewModel
 
 private fun techIcon(name: String): ImageVector = when (name) {

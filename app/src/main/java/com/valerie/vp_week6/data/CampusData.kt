@@ -58,11 +58,6 @@ object CampusData {
             listOf("Jetpack Compose", "Firebase", "CameraX"), ProjectStatus.COMPLETED, "codegreen"
         ),
         Project(
-            "proj-gdsc-03", "gdsc", "Developer RSVP Portal",
-            "Portal pendaftaran webinar dan bootcamp teknologi sinkronisasi Ktor API server.",
-            listOf("Kotlin", "Ktor", "Jetpack Compose"), icon = "cloud"
-        ),
-        Project(
             "proj-cyber-01", "cyber", "Campus Wi-Fi Security Audit",
             "Audit keamanan jaringan Wi-Fi kampus dan laporan celah kerentanan.",
             listOf("Python", "Kotlin"), icon = "shield"

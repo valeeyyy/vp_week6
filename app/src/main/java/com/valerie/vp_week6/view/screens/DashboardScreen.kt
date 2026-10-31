@@ -1,4 +1,4 @@
-package com.valerie.vp_week6.ui.screens
+package com.valerie.vp_week6.view.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -35,16 +35,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.valerie.vp_week6.ui.components.AppCard
-import com.valerie.vp_week6.ui.components.ClubIcon
-import com.valerie.vp_week6.ui.components.EmptyMessage
-import com.valerie.vp_week6.ui.components.IconTile
-import com.valerie.vp_week6.ui.components.JoinedPill
-import com.valerie.vp_week6.ui.components.ProjectIcon
+import com.valerie.vp_week6.view.components.AppCard
+import com.valerie.vp_week6.view.components.ClubIcon
+import com.valerie.vp_week6.view.components.EmptyMessage
+import com.valerie.vp_week6.view.components.IconTile
+import com.valerie.vp_week6.view.components.JoinedPill
+import com.valerie.vp_week6.view.components.ProjectIcon
 import com.valerie.vp_week6.ui.theme.Navy
-import com.valerie.vp_week6.ui.components.ScreenHeader
-import com.valerie.vp_week6.ui.components.SectionHeader
-import com.valerie.vp_week6.ui.components.StatusBadge
+import com.valerie.vp_week6.view.components.ScreenHeader
+import com.valerie.vp_week6.view.components.SectionHeader
+import com.valerie.vp_week6.view.components.StatusBadge
 import com.valerie.vp_week6.ui.theme.Blue600
 import com.valerie.vp_week6.ui.theme.Blue900
 import com.valerie.vp_week6.ui.theme.Slate200
